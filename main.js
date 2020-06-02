@@ -1,16 +1,19 @@
 //Etch-a-sketch
+//Nick Pourjalilvand
 
 
 const input = document.querySelector('input');
-const newGrid = document.querySelector('#newGrid');
+const newGridbtn = document.querySelector('#newGrid');
+const clearGridbtn = document.querySelector('#clearGrid');
+const rainbowbtn = document.querySelector('#rainbow');
 const container = document.querySelector('#container');
 
-newGrid.addEventListener('click', makeGrid);
-
+newGridbtn.addEventListener('click', makeGrid);
+clearGridbtn.addEventListener('click', clearGrid);
 
 function makeGrid() {
 
-    clearGrid();
+    deleteGrid();
     
     const gridSize = input.value;
     console.log(gridSize);
@@ -31,10 +34,14 @@ function makeGrid() {
     console.log("makeGrid was called");
 }
 
-function clearGrid() {
+function deleteGrid() {
     container.textContent = '';
 }
 
+function clearGrid() {
+    document.querySelectorAll('.square').forEach(square => square.classList.remove('blacksquare'));
+}
+
 function changeColor() {
-    
+    this.classList.add('blacksquare');
 }
