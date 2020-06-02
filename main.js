@@ -1,15 +1,20 @@
 //Etch-a-sketch
 //Nick Pourjalilvand
 
-
 const input = document.querySelector('input');
 const newGridbtn = document.querySelector('#newGrid');
 const clearGridbtn = document.querySelector('#clearGrid');
+const blackbtn = document.querySelector('#black');
 const rainbowbtn = document.querySelector('#rainbow');
 const container = document.querySelector('#container');
 
+let blackMode = true;
+let rainbowMode = false;
+
 newGridbtn.addEventListener('click', makeGrid);
 clearGridbtn.addEventListener('click', clearGrid);
+blackbtn.addEventListener('click', black);
+rainbowbtn.addEventListener('click', rainbow);
 
 function makeGrid() {
 
@@ -39,9 +44,36 @@ function deleteGrid() {
 }
 
 function clearGrid() {
-    document.querySelectorAll('.square').forEach(square => square.classList.remove('blacksquare'));
+    document.querySelectorAll('.square').forEach(square => square.style.backgroundColor = 'white');
 }
 
 function changeColor() {
-    this.classList.add('blacksquare');
+    if (blackMode === true) {
+        this.style.backgroundColor = 'black';
+    }
+    else if (rainbowMode === true) {
+        this.style.backgroundColor = getRandomColor();
+    }
+}
+
+function black() {
+    blackMode = true;
+    rainbowMode = false;
+}
+
+function rainbow() {
+    rainbowMode = true;
+    blackMode = false;
+}
+
+function randomNumber(max) {
+    let random = Math.floor(Math.random() * (max + 1));
+    return random;
+}
+
+function getRandomColor() {
+    const R = randomNumber(255);
+    const G = randomNumber(255);
+    const B = randomNumber(255);
+    return `rgb(${R}, ${G}, ${B})`;
 }
